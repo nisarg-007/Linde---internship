@@ -1,0 +1,129 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{% endblock title %}</title>
+
+    <link rel="canonical" href="https://www.wrappixel.com/templates/materialpro-lite/" />
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
+    <link href="{% static 'assets/plugins/chartist-js/dist/chartist.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/plugins/chartist-js/dist/chartist-init.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/plugins/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/plugins/c3-master/c3.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/style.min.css' %}" rel="stylesheet">
+</head>
+
+<body>
+    <div class="preloader">
+        <div class="lds-ripple">
+            <div class="lds-pos"></div>
+            <div class="lds-pos"></div>
+        </div>
+    </div>
+    <div id="main-wrapper" data-layout="vertical" data-navbarbg="skin5" data-sidebartype="full"
+        data-sidebar-position="absolute" data-header-position="absolute" data-boxed-layout="full">
+        <header class="topbar" data-navbarbg="skin6">
+            <nav class="navbar top-navbar navbar-expand-md navbar-dark">
+                <div class="navbar-header" data-logobg="skin6">
+                    
+                    <!-- Logo -->
+                        <b class="logo-icon">
+                            <a href="/mains/"><img src="{% static 'assets/images/Linde.png' %}" alt="homepage" class="dark-logo"  /></a>
+                        </b>
+                    <!-- End Logo -->
+                    <a class="nav-toggler waves-effect waves-light text-white d-block d-md-none"
+                        href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
+                </div>
+                <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5">
+                    <ul class="navbar-nav d-lg-none d-md-block ">
+                        <li class="nav-item">
+                            <a class="nav-toggler nav-link waves-effect waves-light text-white "
+                                href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
+                        </li>
+                    </ul>
+                    <div  style="display: flex; justify-content: center;" class="container">
+                        <h2>Linde's Suggestion system</h2>
+                      </div>
+                      <style>
+                        .container {
+                          width: 150%;
+                          margin: auto;
+                        }
+                        
+                        h2 {
+                          text-align: center;
+                          color: white;
+                         
+                          font-family: Arial, sans-serif;
+                        }
+                       </style>
+
+                    <ul class="navbar-nav me-auto mt-md-0 "></ul>
+                    <ul class="navbar-nav">
+                        <!-- User profile -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="{% static 'assets/images/users/1.jpg' %}" alt="user" class="profile-pic me-2">{{u.username}}
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown"><li><a class="dropdown-item" href="/mains/logout/">Log out</a></li></ul>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <aside class="left-sidebar" data-sidebarbg="skin6">
+            <div class="scroll-sidebar">
+                <nav class="sidebar-nav">
+                    <ul id="sidebarnav">
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                href="/mains/" aria-expanded="false"><i class="mdi me-2 mdi-home"></i><span
+                                    class="hide-menu">Home</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                href="/mains/myquestions" aria-expanded="false">
+                                <i class="mdi me-2 mdi-book-variant"></i><span class="hide-menu">My Questions</span></a>
+                        </li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                href="/mains/askquestions" aria-expanded="false"><i class="mdi me-2 mdi-border-color"></i><span
+                                    class="hide-menu">Ask a Question</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                href="/mains/solveissues/{{"solve"}}" aria-expanded="false"><i
+                                    class="mdi me-2 mdi-clipboard-check"></i>
+                                    
+                                <span class="hide-menu">Solve Issues&nbsp;</span>
+                                {% if notification_issue > 0 %}
+                                    <div class="circle">
+                                        <span class="circle__content">  {{notification_issue}}</span>
+                                      </div>
+                                {% endif %}
+                            </a>
+                            </li>
+                    </ul>
+
+                </nav>
+            </div>
+            </aside>
+        
+        {% block body %}{% endblock body%}
+
+
+
+
+
+        <script src="{% static 'assets/plugins/jquery/dist/jquery.min.js' %}"></script>
+        <script src="{% static 'assets/plugins/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
+        <script src="{% static 'js/app-style-switcher.js' %}"></script>
+        <script src="{% static 'js/waves.js' %}"></script>
+        <script src="{% static 'js/sidebarmenu.js' %}"></script>
+        <script src="{% static 'assets/plugins/chartist-js/dist/chartist.min.js' %}"></script>
+        <script src="{% static 'assets/plugins/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.min.js' %}"></script>
+        <script src="{% static 'assets/plugins/d3/d3.min.js' %}"></script>
+        <script src="{% static 'assetsins/c3-master/c3.min.js/plug' %}"></script>
+        <script src="{% static 'js/pages/dashboards/dashboard1.js' %}"></script>
+        <script src="{% static 'js/custom.js'%}"></script>
+    </body> 
+    </html>

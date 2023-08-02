@@ -1,0 +1,54 @@
+{% if u.role == 'user' %}
+{%  include 'base1.html' %}
+{% elif u.role == 'admin' %}
+{%  include 'base2.html' %}
+{% endif %}
+{% load static%}
+
+{% block title %}Suggestion System{% endblock title %}
+{% block body %}
+  <div id="main-wrapper" data-layout="vertical" data-navbarbg="skin5" data-sidebartype="full"
+        data-sidebar-position="absolute" data-header-position="absolute" data-boxed-layout="full">
+    <div class="page-wrapper">
+     <div class="container-fluid">
+  <div class="container">
+    <form method="post" action="addq/"> 
+        {% csrf_token %}
+      <div class="form-group">
+        <label for="title" class="Form-Heading">Title:</label>
+        <input type="text" id="title"  name="title" maxlength="50" value="{{i.Title}}" disabled>
+      </div>
+      <div class="form-group">
+        <label for="description" class="Form-Heading">Description:</label>
+        <textarea type="text" id="description"  name="description" maxlength="1000" rows="5"  disabled>{{i.Description}}</textarea>
+      </div>
+      <div class="form-group">
+        <label for="Status" class="Status">Status:</label>
+        {% if i.Status_A == "Accepted" and i.Status_M == "Accepted" %}
+        <label class="Abutton">Accept</label>
+        {% elif i.Status_A == "Rejected" %}
+        <label class="Rbutton">Reject</label>
+        {% else %}
+        <label class="Pbutton">Pending</label> 
+        {% endif %}
+        </div>
+    </form>
+  </div>
+  <footer>
+    <div class="container">
+      <p>
+        <a href="https://www.linde.com/sitemap" target="_blank">Sitemap</a> |
+        <a href="https://www.linde.com/privacy-statement" target="_blank">Privacy Statement</a> |
+        <a href="https://www.linde.com/terms-conditions" target="_blank">Terms and Conditions</a> |
+        <a href="https://www.linde.com/contact-us" target="_blank">Contact Us</a> |
+        <a href="https://www.linde.com" target="_blank">About Us</a>
+      </p>
+    </div>
+  </footer>
+</div>
+
+</div>
+
+</div>
+  
+{% endblock body %}

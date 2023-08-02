@@ -1,0 +1,149 @@
+{% extends 'base1.html' %}
+{% load static %}
+
+{% block title%}Review Manager{% endblock title%}
+
+{% block body %}
+
+<div class="page-wrapper">
+        <div class="container-fluid">
+            <!-- Start Page Content -->
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        
+                        
+                        {% if page_obj %}
+                        <div class="card-body">
+                            <div class="row align-items-center">
+                                <div class="col-md-6 col-8 align-self-center">
+                                    <h3 class="page-title mb-0 p-0">Solve Issues</h3>
+                                    <div class="d-flex align-items-center">
+                                        <nav aria-label="breadcrumb">
+                                        </nav>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-4 align-self-center">
+                                    <div class="text-end upgrade-btn">
+                                        <a href="/mains/solveissues/{{"Pending"}}"
+                                            class="btn btn-danger d-none d-md-inline-block text-white" >Pending</a>
+                                            <a href="/mains/solveissues/{{"Accepted"}}"
+                                            class="btn btn-success d-none d-md-inline-block text-white" >Accepted</a>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table user-table">
+                                    <thead>
+                                        <tr>
+                                            <th class="border-top-0">QID</th>
+                                                <th class="border-top-0">Title</th>
+                                                <th class="border-top-0">Time</th>
+                                                <th class="border-top-0">Status</th>
+                                        </tr>
+                                    </thead>    {% for i in page_obj %}
+                                    {% if status == "Pending" %}
+                                    {% if i.Status_A == "Accepted" and i.Status_M == "Pending" %}
+                                    <tbody>
+                                        <tr>
+                                            <td>{{i.Form_id}}</td>
+                                            <td><a href="repsolveissues/{{i.Form_id}}">{{i.Title}}</a></td>
+                                            <td>{{i.Entry_Time}}</td>
+                                            <td>{{i.Status_M}}</td>
+                                        </tr>  
+                                    </tbody>
+                                    {% endif %}
+                                    {% elif status == "Accepted" %}
+                                    {% if i.Status_A == "Accepted" and i.Status_M == "Accepted" %}
+                                    <tbody>
+                                        <tr>
+                                            <td>{{i.Form_id}}</td>
+                                            <td><a href="repsolveissues/{{i.Form_id}}">{{i.Title}}</a></td>
+                                            <td>{{i.Entry_Time}}</td>
+                                            <td>{{i.Status_M}}</td>
+                                        </tr>  
+                                    </tbody>
+                                    {% endif %}
+                                    
+                                    {% else %}
+                                    {% if i.Status_A == "Accepted" and i.Status_M == "Pending" %}
+                                    <tbody>
+                                        <tr>
+                                            <td>{{i.Form_id}}</td>
+                                            <td><a href="repsolveissues/{{i.Form_id}}">{{i.Title}}</a></td>
+                                            <td>{{i.Entry_Time}}</td>
+                                            <td>{{i.Status_M}}</td>
+                                        </tr>  
+                                    </tbody>
+                                    {% elif i.Status_A == "Accepted" and i.Status_M == "Accepted" %}
+                                    <tbody>
+                                        <tr>
+                                            <td>{{i.Form_id}}</td>
+                                            <td><a href="repsolveissues/{{i.Form_id}}">{{i.Title}}</a></td>
+                                            <td>{{i.Entry_Time}}</td>
+                                            <td>{{i.Status_M}}</td>
+                                        </tr>  
+                                    </tbody>
+                                    {% endif %}
+                                    {% endif %}
+                                    {% endfor %}
+                                </table>
+                                {% else %}
+                                <div style="text-align: center;">
+                                    <img src="{% static 'assets/images/users/solissues.gif'  %}"height="400" width="400">
+                                  </div>
+                               
+                                {% endif %}
+
+                            </div>
+                            {% if page_obj %}
+                            <nav aria-label="...">
+                                
+                                <ul class="pagination" style="margin-left:15px;">
+                                  {% if page_obj.has_previous %}
+                                  <li class="page-item ">
+                                    <a class="page-link" href="/mains/solveissues/{{pagestatus}}" tabindex="-1">First</a>
+                                  </li>
+                                  <li class="page-item ">
+                                    <a class="page-link" href="/mains/solveissues/{{pagestatus}}?page={{page_obj.previous_page_number}}" tabindex="-1">Previous</a>
+                                  </li>
+                                  {% endif %}
+                                  {% for n in totalpagelist %}
+                                  <li class="page-item"><a class="page-link" href="/mains/solveissues/{{pagestatus}}?page={{n}}">{{n}}</a></li>
+                                 {% endfor %}
+                                 
+                                  
+                                 {% if page_obj.has_next %}
+                                 
+                                   <li class="page-item">
+                                     <a class="page-link" href="/mains/solveissues/{{pagestatus}}?page={{page_obj.next_page_number}}">Next</a>
+                                   </li>
+
+                                 {% endif %}
+                                 {% endif %}
+                                </ul>
+                              </nav>
+                              
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End PAge Content -->
+        </div>
+   
+    </div>
+</div>
+<footer class="text-center text-lg-start bg-white text-muted">
+    <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.025);">
+        <a href="https://www.linde.com/sitemap" target="_blank">Sitemap</a> |
+        <a href="https://www.linde.com/privacy-statement" target="_blank">Privacy Statement</a> |
+        <a href="https://www.linde.com/terms-conditions" target="_blank">Terms and Conditions</a> |
+        <a href="https://www.linde.com/contact-us" target="_blank">Contact Us</a> |
+        <a href="https://www.linde.com" target="_blank">About Us</a>
+    </div>
+  </footer>
+
+
+{% endblock body %}

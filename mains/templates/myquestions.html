@@ -1,0 +1,104 @@
+{% if u.role == 'user' %}
+{%  include 'base1.html' %}
+{% elif u.role == 'admin' %}
+{%  include 'base2.html' %}
+{% endif %}
+{% load static%}
+{% load humanize %}
+
+{% block title %}{% endblock title %}
+{% block body %}
+
+<div class="page-wrapper">
+    
+    <div class="container-fluid">
+        
+        <div class="row">
+                
+            </div> 
+                <div class="card">
+                    {% if page_obj %}
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="home" role="tabpanel">
+                            <div class="card-body">
+                                <div class="profiletimeline border-start-0">
+                                    {% for i in q reversed %}
+                                        
+                                    <div class="sl-item">
+                                        <div class="sl-left"> <img src="{% static 'assets/images/users/1.jpg' %}" alt="user"
+                                                class="img-circle"> </div>
+                                        <div class="sl-right">
+                                            <div><a href="#" class="link">{{i.Mail}}</a> <span class="sl-date">{{ i.Entry_Time|naturaltime }}&nbsp;
+                                                {% if i.Status_A == "Accepted" and i.Status_M == "Accepted" %}
+                                                <label class="label label-success" style="font-size:13px">Accept</label>
+                                                {% elif i.Status_A == "Rejected" %}
+                                                <label class="label label-danger" style="font-size:13px">Reject</label>
+                                                {% else %}
+                                                <label class="label label-warning" style="font-size:13px">Pending</label> 
+                                                {% endif %}
+                                            </span>
+                                            <h4><a href="/mains/reviewmanager/rcreviewemployee/{{i.Form_id}}">{{i.Title}}</a></h4>
+                                                
+                                                {% if i.Manager_answer|length > 250 %}
+                                                <a href="/mains/reviewmanager/rcreviewemployee/{{i.Form_id}}"> <p><b> {{ i.Manager_answer|slice:"0:250" }}.....Read More</b> </p></a>
+                                                {% else %}
+                                                <a href="/mains/reviewmanager/rcreviewemployee/{{i.Form_id}}"><p>{{i.Manager_answer}}</p></a>
+                                                {% endif %}
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    
+                                        {% endfor %}
+                                        {% else %}
+                                                            <div class="card-body">
+                                                                <div style="text-align: center;">
+                                                                <img src="{% static 'assets/images/users/myq.gif' %}">
+                                                            </div>
+                                    {% endif %}
+                                        {% if page_obj %}
+        <nav aria-label="...">
+            <ul class="pagination">
+                {% if page_obj.has_previous %}
+                <li class="page-item ">
+                  <a class="page-link" href="/mains/myquestions/{{pagestatus}}" tabindex="-1">First</a>
+                </li>
+                <li class="page-item ">
+                  <a class="page-link" href="/mains/myquestions/{{pagestatus}}?page={{page_obj.previous_page_number}}" tabindex="-1">Previous</a>
+                </li>
+                {% endif %}
+                {% for n in totalpagelist %}
+                <li class="page-item"><a class="page-link" href="/mains/myquestions/{{pagestatus}}?page={{n}}">{{n}}</a></li>
+               {% endfor %}
+               
+                
+               {% if page_obj.has_next %}
+               
+                 <li class="page-item">
+                   <a class="page-link" href="/mains/myquestions/{{pagestatus}}?page={{page_obj.next_page_number}}">Next</a>
+                 </li>
+
+               {% endif %}
+               {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+    </div>
+</div>
+<footer class="text-center text-lg-start bg-white text-muted">
+
+    <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.025);">
+        <a href="https://www.linde.com/sitemap" target="_blank">Sitemap</a> |
+        <a href="https://www.linde.com/privacy-statement" target="_blank">Privacy Statement</a> |
+        <a href="https://www.linde.com/terms-conditions" target="_blank">Terms and Conditions</a> |
+        <a href="https://www.linde.com/contact-us" target="_blank">Contact Us</a> |
+        <a href="https://www.linde.com" target="_blank">About Us</a>
+    </div>
+  </footer>
+
+{% endblock body %}

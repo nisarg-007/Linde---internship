@@ -1,0 +1,54 @@
+{% extends 'base1.html' %}
+{% load static%}
+
+  {% block body %}
+  
+  <div class="page-wrapper">
+    
+    <div class="container-fluid">
+        <!-- Start Page Content -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                      <h1>ASK THE COMPANY</h1>
+                      <form method="post" action="addq/"> 
+                          {% csrf_token %}
+                        <div class="form-group">
+                          <label for="title" class="Form-Heading">Title:</label>
+                          <input type="text" id="title" name="title" maxlength="50" required>
+                        </div>
+                        <div class="form-group">
+                          <label for="description" class="Form-Heading">Description:</label>
+                          <textarea type="text" id="description" name="description" maxlength="1000" rows="12"></textarea>
+                        </div>
+                        <div class="form-group">
+                        
+                        <div class="form-check form-switch ">
+                          <input class="form-check-input Form-Heading" type="checkbox" name="qusername" id="qusername" role="switch">
+                          <label class="form-check-label Form-Heading" for="flexSwitchCheckDefault">Ask Anonymously??</label>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <button type="submit" class="btn btn-success d-none d-md-inline-block text-white">Submit</button>
+                      </div>
+                      </form> 
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End PAge Content -->
+    </div>
+</div>
+</div>
+<footer class="text-center text-lg-start bg-white text-muted">
+  <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.025);">
+      <a href="https://www.linde.com/sitemap" target="_blank">Sitemap</a> |
+      <a href="https://www.linde.com/privacy-statement" target="_blank">Privacy Statement</a> |
+      <a href="https://www.linde.com/terms-conditions" target="_blank">Terms and Conditions</a> |
+      <a href="https://www.linde.com/contact-us" target="_blank">Contact Us</a> |
+      <a href="https://www.linde.com" target="_blank">About Us</a>
+  </div>
+</footer>
+
+{% endblock body %}
